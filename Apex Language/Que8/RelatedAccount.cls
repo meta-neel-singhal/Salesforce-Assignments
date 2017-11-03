@@ -7,10 +7,16 @@ populate Manager Field by related account which is linked with the contact given
 public class RelatedAccount {
     public void setRelatedAccounts(List<Opportunity> oppty) {
         //Integer count = 0;
+        
+        Map<Id, Id> accountsMap = new Map<Id, Id>();
+        
+        for (Contact con : [SELECT AccountId FROM Contact]) {
+            accountsMap.put(con.Id, con.AccountId);
+        }
+        
         for (Opportunity o : oppty) {
             if (o.Bill_To_Contact__c != null && o.Manager__c == null) {
-                o.Manager__c = [SELECT AccountId FROM Contact WHERE Id = :o.Bill_To_Contact__c LIMIT 1].AccountId;
-                //count++;
+                o.Manager__c = accountsMap.get(o.Bill_To_Contact__c);
             }
         }
        // return count;
