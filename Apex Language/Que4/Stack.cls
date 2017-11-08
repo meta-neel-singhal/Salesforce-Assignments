@@ -1,5 +1,9 @@
 public class Stack {
-    private List<Object> listOfObjects = new List<Object>();
+    private List<Object> listOfObjects;
+    
+    public Stack() {
+        listOfObjects = new List<Object>();
+    }
     
     public void push(Object element) {
         if (element == null) {
@@ -8,20 +12,20 @@ public class Stack {
         
         listOfObjects.add(element);
     }
-   
+    
     public Object pop() {
         if (size() == 0) {
             throw new StackException('Stack is Empty');
         }
         
-        return listOfObjects.remove( size() - 1 );
+        return listOfObjects.remove(size() - 1);
     }
     
-	public Integer size() {
-   		return listOfObjects.size();   
+    public Integer size() {
+        return listOfObjects.size();   
     }
     
     class StackException extends Exception {
-       
+        
     }
 }

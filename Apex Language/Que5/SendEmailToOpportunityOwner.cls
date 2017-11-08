@@ -1,14 +1,11 @@
-global class sendEmailToOpptyOwner implements Database.Batchable<Opportunity> {
+//Create a Scheduler to mail to Opportunity Owner , if not modified for last 30 days.
+public class SendEmailToOpportunityOwner implements Database.Batchable<Opportunity> {
 
-    global Iterable<Opportunity> start(Database.BatchableContext bc) {
+    public Iterable<Opportunity> start(Database.BatchableContext context) {
         return [SELECT Id, OwnerId FROM Opportunity where LastModifiedDate = LAST_N_DAYS:30];
     }
-    
-    /*global Database.QueryLocator start(Database.BatchableContext bc) {
-        return Database.getQueryLocator('SELECT Id, OwnerId FROM Opportunity where LastModifiedDate = LAST_N_DAYS:30');
-    }*/
 
-    global void execute(Database.BatchableContext bc, List<Opportunity> scope) {
+    public void execute(Database.BatchableContext context, List<Opportunity> scope) {
         for(Opportunity s : scope) {
             Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
             String[] toAddresses = new String[] {s.CreatedBy.Email};
@@ -19,6 +16,6 @@ global class sendEmailToOpptyOwner implements Database.Batchable<Opportunity> {
         }
     }
 
-    global void finish(Database.BatchableContext bc) {
+    public void finish(Database.BatchableContext context) {
     }
 }
