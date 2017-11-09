@@ -34,12 +34,18 @@ trigger StudentTrigger on Student__c (before insert, after insert, after update)
     
     //When update any student’s in class then update MyCount Accordingly.
     if (Trigger.isAfter && Trigger.isUpdate) {
+        Set<Id> oldClassIds = new Set<Id>();
+        for (Id studentId : Trigger.oldMap.keySet()) {
+        	oldClassIds.add(Trigger.oldMap.get(studentId).Class__c);
+        }
+        Map<Id, Class__c> oldClassMap = new Map<Id, Class__c>([SELECT Id, Max_Size__c, NumberOfStudents__c, My_Count__c FROM Class__c WHERE Id IN :oldclassIds]);
+        
         for(Student__c student : Trigger.new) {
-            if(student.class__c != Trigger.oldMap.get(student.Id).class__c) {
+            if(student.Class__c != Trigger.oldMap.get(student.Id).Class__c) {
                 Class__c classSelected = classMap.get(student.Class__c);  
                 classSelected.My_Count__c += 1;
                 classesToUpdate.add(classSelected);
-                classSelected = classMap.get(Trigger.oldMap.get(student.Id).class__c);
+                classSelected = oldclassMap.get(Trigger.oldMap.get(student.Id).Class__c);
                 classSelected.My_Count__c -= 1;
                 classesToUpdate.add(classSelected);
             }
