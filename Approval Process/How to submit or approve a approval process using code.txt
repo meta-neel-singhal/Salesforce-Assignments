@@ -1,0 +1,227 @@
+Agenda:
+
+Automatically submit the record for approval on the basis of field value.
+Approve / Reject the record on the basis of field.
+
+
+Assumptions:
+
+Opportunity Object is used.
+Approval Process is already set on the Opportunity.
+Field “Next_Approver” will decide that who is going to approve the record.
+There are three steps in the approval process.
+
+
+>> Automatically submit the approval process using trigger – Apex:
+Below method is used to automatically submit the approval process using trigger.
+
+    public void submitForApproval(Opportunity opp)
+    {
+        // Create an approval request for the Opportunity
+        Approval.ProcessSubmitRequest req1 = new Approval.ProcessSubmitRequest();
+        req1.setComments('Submitting request for approval automatically using Trigger');
+        req1.setObjectId(opp.id);
+        req1.setNextApproverIds(new Id[] {opp.Next_Approver__c});
+
+        // Submit the approval request for the Opportunity
+        Approval.ProcessResult result = Approval.process(req1);
+
+    }
+
+Approval.process(approvalRequests, allOrNone)
+Submits a new approval request and approves or rejects existing approval requests.
+
+Parameters
+1. approvalRequests: Approval.ProcessRequest
+2. allOrNone (Type: Boolean)
+The optional allOrNone parameter specifies whether the operation allows for partial success. If you specify false for this parameter and an approval fails, the remainder of the approval processes can still succeed.
+
+Return Value
+Approval.ProcessResult
+
+
+>> Automatically approve the approval process using trigger – Apex:
+Below method is used to automatically approve the approval process using trigger.
+
+
+    public void approveRecord(Opportunity opp)
+    {
+        Approval.ProcessWorkitemRequest req = new Approval.ProcessWorkitemRequest();
+        req.setComments('Approving request using Trigger');
+        req.setAction('Approve');
+        req.setNextApproverIds(new Id[] {opp.Next_Approver__c});
+        Id workItemId = getWorkItemId(opp.id); 
+
+        if(workItemId == null)
+        {
+            opp.addError('Error Occured in Trigger');
+        }
+        else
+        {
+            req.setWorkitemId(workItemId);
+            // Submit the request for approval
+            Approval.ProcessResult result =  Approval.process(req);
+        }
+    }
+
+To get the WorkItemId we have to use the custom code:
+    public Id getWorkItemId(Id targetObjectId)
+    {
+        Id retVal = null;
+
+        for(ProcessInstanceWorkitem workItem  : [Select p.Id from ProcessInstanceWorkitem p
+            where p.ProcessInstance.TargetObjectId =: targetObjectId])
+        {
+            retVal  =  workItem.Id;
+        }
+
+        return retVal;
+    }
+
+>> Automatically reject the approval process using trigger – Apex:
+Following code is used to reject the approval process using code.
+
+    public void rejectRecord(Opportunity opp)
+    {
+        Approval.ProcessWorkitemRequest req = new Approval.ProcessWorkitemRequest();
+        req.setComments('Rejected request using Trigger');
+        req.setAction('Reject');
+        //req.setNextApproverIds(new Id[] {UserInfo.getUserId()});
+        Id workItemId = getWorkItemId(opp.id); 
+
+        if(workItemId == null)
+        {
+            opp.addError('Error Occured in Trigger');
+        }
+        else
+        {
+            req.setWorkitemId(workItemId);
+            // Submit the request for approval
+            Approval.ProcessResult result =  Approval.process(req);
+        }
+    }
+
+
+Complete Code:
+
+trigger AutomateApprove on Opportunity(After insert, After update)
+{
+
+    for (Integer i = 0; i < Trigger.new.size(); i++)
+    {
+     try
+     {
+        if( Trigger.isInsert || (Trigger.new[i].Next_Step__c == 'Submit' && Trigger.old[i].Next_Step__c != 'Submit'))
+        {
+           submitForApproval(Trigger.new[i]);
+        }
+        else if(Trigger.isInsert || (Trigger.new[i].Next_Step__c == 'Approve' && Trigger.old[i].Next_Step__c != 'Approve'))
+        {
+             approveRecord(Trigger.new[i]);
+        }
+        else if(Trigger.isInsert || (Trigger.new[i].Next_Step__c == 'Reject' && Trigger.old[i].Next_Step__c != 'Reject'))
+        {
+             rejectRecord(Trigger.new[i]);
+        }
+     }catch(Exception e)
+     {
+         Trigger.new[i].addError(e.getMessage());
+     }
+    }
+
+    /**
+    * This method will submit the opportunity automatically
+    **/
+    public void submitForApproval(Opportunity opp)
+    {
+        // Create an approval request for the Opportunity
+        Approval.ProcessSubmitRequest req1 = new Approval.ProcessSubmitRequest();
+        req1.setComments('Submitting request for approval automatically using Trigger');
+        req1.setObjectId(opp.id); 
+
+        req1.setNextApproverIds(new Id[] {opp.Next_Approver__c});
+
+        // Submit the approval request for the Opportunity
+        Approval.ProcessResult result = Approval.process(req1);
+    }
+
+	/**
+	* Get ProcessInstanceWorkItemId using SOQL
+	**/
+    public Id getWorkItemId(Id targetObjectId)
+    {
+        Id retVal = null;
+
+        for(ProcessInstanceWorkitem workItem  : [Select p.Id from ProcessInstanceWorkitem p
+            where p.ProcessInstance.TargetObjectId =: targetObjectId])
+        {
+            retVal  =  workItem.Id;
+        }
+
+        return retVal;
+    }
+
+    /**
+    * This method will Approve the opportunity
+    **/
+    public void approveRecord(Opportunity opp)
+    {
+        Approval.ProcessWorkitemRequest req = new Approval.ProcessWorkitemRequest();
+        req.setComments('Approving request using Trigger');
+        req.setAction('Approve');
+        req.setNextApproverIds(new Id[] {opp.Next_Approver__c});
+        Id workItemId = getWorkItemId(opp.id); 
+
+        if(workItemId == null)
+        {
+            opp.addError('Error Occured in Trigger');
+        }
+        else
+        {
+            req.setWorkitemId(workItemId);
+            // Submit the request for approval
+            Approval.ProcessResult result =  Approval.process(req);
+        }
+    }
+
+    /**
+    * This method will Reject the opportunity
+    **/
+    public void rejectRecord(Opportunity opp)
+    {
+        Approval.ProcessWorkitemRequest req = new Approval.ProcessWorkitemRequest();
+        req.setComments('Rejected request using Trigger');
+        req.setAction('Reject');
+        Id workItemId = getWorkItemId(opp.id);   
+
+        if(workItemId == null)
+        {
+            opp.addError('Error Occured in Trigger');
+        }
+        else
+        {
+            req.setWorkitemId(workItemId);
+            // Submit the request for approval
+            Approval.ProcessResult result =  Approval.process(req);
+        }
+    }
+}
+
+
+Note on possible errors:
+
+1. If you have the “manual Selection of approver” enabled for your approval process/steps then you must specify the approver in the trigger, else you will get an error something like:
+“System.DmlException: Process failed. First exception on row 0; first error: REQUIRED_FIELD_MISSING, missing required field: []”
+
+2. If you set the wrong WorkitemId then may get following error:
+Process failed. First exception on row 0; first error: INVALID_CROSS_REFERENCE_KEY, invalid cross reference id: []
+
+
+References:
+
+http://www.jitendrazaa.com/blog/salesforce/dynamic-approval-process-based-on-the-apex-and-trigger/
+
+https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_process_example.htm
+
+https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_methods_system_approval.htm#apex_methods_system_approval
+
