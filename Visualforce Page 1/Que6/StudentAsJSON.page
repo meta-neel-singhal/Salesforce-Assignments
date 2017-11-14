@@ -1,0 +1,5 @@
+<apex:page controller="StudentJSONController" showHeader="false">
+    <apex:repeat value="{!studentsJSON}" var="student" > 
+        <apex:outputText value="{!student}" /> <br /> 
+    </apex:repeat>
+</apex:page>
