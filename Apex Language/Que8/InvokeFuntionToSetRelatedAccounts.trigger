@@ -1,4 +1,4 @@
 trigger InvokeFuntionToSetRelatedAccounts on Opportunity (before update) {
-	RelatedAccount ra = new RelatedAccount();
-    ra.setRelatedAccounts(Trigger.new);
+	RelatedAccount relatedAccountObject = new RelatedAccount();
+    relatedAccountObject.setRelatedAccounts(Trigger.new);
 }

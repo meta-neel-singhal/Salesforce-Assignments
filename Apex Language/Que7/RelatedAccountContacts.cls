@@ -21,7 +21,7 @@ public class RelatedAccountContacts {
                             if (contactIds == null) {
                                 contactIds = con.Id ;
                             } else {
-                                contactIds = ',' + contactIds + con.Id;
+                                contactIds += ',' + con.Id;
                             }
                         }
                     }
