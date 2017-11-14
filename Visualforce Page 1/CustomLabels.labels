@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Account</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Account</shortDescription>
+        <value>Account</value>
+    </labels>
+    <labels>
+        <fullName>Accounts_List</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Accounts List</shortDescription>
+        <value>Accounts List</value>
+    </labels>
+    <labels>
+        <fullName>Billing_City</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Billing City</shortDescription>
+        <value>Billing City</value>
+    </labels>
+    <labels>
+        <fullName>Billing_Country</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Billing Country</shortDescription>
+        <value>Billing Country</value>
+    </labels>
+    <labels>
+        <fullName>Billing_State</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Billing State</shortDescription>
+        <value>Billing State</value>
+    </labels>
+    <labels>
+        <fullName>Cancel</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>Class</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Class</shortDescription>
+        <value>Class</value>
+    </labels>
+    <labels>
+        <fullName>Class_List</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Class List</shortDescription>
+        <value>Class List</value>
+    </labels>
+    <labels>
+        <fullName>Clear</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Clear</shortDescription>
+        <value>Clear</value>
+    </labels>
+    <labels>
+        <fullName>Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error</shortDescription>
+        <value>Error :</value>
+    </labels>
+    <labels>
+        <fullName>First_Page</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>First Page</shortDescription>
+        <value>First Page</value>
+    </labels>
+    <labels>
+        <fullName>Last_Page</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Last Page</shortDescription>
+        <value>Last Page</value>
+    </labels>
+    <labels>
+        <fullName>Next_Page</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Next Page</shortDescription>
+        <value>Next Page</value>
+    </labels>
+    <labels>
+        <fullName>Previous_Page</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Previous Page</shortDescription>
+        <value>Previous Page</value>
+    </labels>
+    <labels>
+        <fullName>Save</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>Search</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Search</shortDescription>
+        <value>Search</value>
+    </labels>
+    <labels>
+        <fullName>Student</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Student</shortDescription>
+        <value>Student</value>
+    </labels>
+    <labels>
+        <fullName>Student_Details</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Student Details</shortDescription>
+        <value>Student Details</value>
+    </labels>
+</CustomLabels>

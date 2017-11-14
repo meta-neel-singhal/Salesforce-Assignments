@@ -1,0 +1,29 @@
+<apex:page controller="FilterAccountController">
+    <apex:form >
+        <apex:pageBlock title="{!$Label.Account}">
+            
+            <apex:pageBlockSection columns="1">
+                <apex:inputText label="{!$Label.Billing_City}" value="{!billingCity}" />
+                <apex:inputText label="{!$Label.Billing_State}" value="{!billingState}" />
+                <apex:inputText label="{!$Label.Billing_Country}" value="{!billingCountry}" />
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!search}" value="{!$Label.Search}"/>
+            </apex:pageBlockButtons>
+            
+        </apex:pageBlock>
+
+        <apex:pageBlock title="{!$Label.Accounts_List}">       
+            
+            <apex:pageBlockTable value="{!filterAccounts}" var="account">
+                <apex:column value="{!account.name}"/>
+                <apex:column value="{!account.billingCity}"/>
+                <apex:column value="{!account.billingState}"/>
+                <apex:column value="{!account.billingCountry}"/>
+                <apex:column value="{!account.annualRevenue}"/>
+            </apex:pageBlockTable>
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

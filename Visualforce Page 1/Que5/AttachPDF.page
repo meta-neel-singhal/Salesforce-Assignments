@@ -1,0 +1,2 @@
+<apex:page controller="savePDF" action="{!saveAttachment}" >
+</apex:page>
