@@ -1,0 +1,87 @@
+<apex:page standardController="Purchase_Order__c" extensions="ProductExtension">
+    <apex:form >
+        <apex:pageBlock title="{!$Label.Order_Details}">
+            <apex:pageBlockSection columns="1">
+                <apex:inputField value="{!Purchase_Order__c.Name}" rendered="{!display}" />
+                <apex:inputField value="{!Purchase_Order__c.Customer__c}" />
+                <apex:inputField value="{!Purchase_Order__c.Purchase_Date__c}" />
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockButtons >
+                <apex:commandButton value="{!$Label.Save}" action="{!saveChanges}"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+        
+        <apex:pageBlock title="{!$Label.Available_Products}" id="productsList">
+            <apex:pageBlockTable value="{!productsList}" var="product">
+                <apex:column value="{!product.ProductCode}" />
+                <apex:column value="{!product.Name}" />
+                <apex:column value="{!product.Unit_Price__c}" />
+                <apex:column >
+                    <apex:commandLink action="{!addProduct}" reRender="productsList, cart">
+                        <apex:param name="id_param" assignTo="{!productIdToAdd}" value="{!product.Id}" />
+                        <apex:image value="{!URLFOR($Resource.Cart_Image, 'cart-icon.png')}"/>
+                    </apex:commandLink>
+                </apex:column>
+            </apex:pageBlockTable>
+            
+            <!-- Pagination -->
+            <table style="width: 100%">
+                <tr>
+                    <td>
+                        {!$Label.Page} <apex:outputText value=" {!PageNumber} of {! CEILING(ResultSize / PageSize) }"/>
+                    </td>
+                    <td align="right">
+                        <!-- Previous page -->
+                        <!-- active -->
+                        <apex:commandLink action="{!Previous}" value="{!$Label.Previous_Page}" rendered="{!HasPrevious}"/>
+                        <!-- inactive (no earlier pages) -->
+                        <apex:outputText style="color: #ccc;" value="{!$Label.Previous_Page}" rendered="{!!(HasPrevious)}"/>
+                        &nbsp;&nbsp;  
+                        <!-- Next page -->
+                        <!-- active -->
+                        <apex:commandLink action="{!Next}" value="{!$Label.Next_Page}" rendered="{!HasNext}"/>
+                        <!-- inactive (no more pages) -->
+                        <apex:outputText style="color: #ccc;" value="{!$Label.Next_Page}" rendered="{!!(HasNext)}"/>
+                    </td>
+                </tr>
+            </table>
+        </apex:pageBlock>
+        
+        <apex:pageBlock title="{!$Label.Cart}" id="cart">
+            <apex:pageBlockTable id="cartItems" value="{!cartItemsList}" var="item">
+                <apex:column value="{!item.Product__c}" />
+                <apex:column headerValue="{!$Label.Quantity}" id="quantityPurchase">
+                    <apex:outputLabel id="quantityOutput" value="{!item.Quantity__c}" ondblclick="makeEditable('{!$Component.saveQuantity}', '{!$Component.quantityInput}', '{!$Component.quantityOutput}')" />
+                    <apex:inputField id="quantityInput" value="{!item.Quantity__c}" style="display:none" />
+                    <apex:commandButton id="saveQuantity" value="{!$Label.Save}" onclick="saveAndDisable('{!$Component.saveQuantity}', '{!$Component.quantityInput}', '{!$Component.quantityOutput}')" style="display:none;" reRender="cart"/>
+                    <script>
+                    function makeEditable(saveQuantity, quantityInput, quantityOutput) {
+                        document.getElementById(quantityInput).style.display = 'inline';
+                        document.getElementById(saveQuantity).style.display = 'inline';
+                        document.getElementById(quantityOutput).style.display = 'none';
+                    }
+                    function saveAndDisable(saveQuantity, quantityInput, quantityOutput) {
+                        document.getElementById(saveQuantity).style.display = 'none';
+                        document.getElementById(quantityInput).style.display = 'none';
+                        document.getElementById(quantityOutput).style.display = 'inline';
+                    }
+                    </script> 
+                </apex:column>
+                <apex:column headerValue="{!$Label.Total_Price}">
+                    <apex:inputText id="amount" value="{!item.Total_Price__c}" html-readonly="true" style="border:none; background-color:transparent;" />  
+                    <script>
+                    var itemQuantity = document.getElementById('{!$Component.amount}');
+                    itemQuantity.value = '{!item.Unit_Price__c}'*'{!item.Quantity__c}';
+                    </script>
+                </apex:column>
+                <apex:column >
+                    <apex:commandLink action="{!deleteProduct}" reRender="productsList, cart">
+                        <apex:param name="id_parameter" assignTo="{!productIdToDelete}" value="{!item.Product__c}" />
+                        <apex:image value="{!URLFOR($Resource.Cart_Image, 'remove.png')}"/>
+                    </apex:commandLink>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>    
+    </apex:form>   
+</apex:page>
