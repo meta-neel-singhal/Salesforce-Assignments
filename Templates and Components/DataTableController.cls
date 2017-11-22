@@ -1,92 +1,125 @@
 public class DataTableController {
-    public String sObjectValue {get; set;}
-    public List<String> fieldNameList {get; set;}
-    public String fieldsValue {get; set;}
-    public String query {get; set;}
-    public Boolean display {get; set;}
-    public Integer pageSize {get; set;}
-    public Integer pageNumberToGo {get; set;}
-    public String orderBy {get; set;}
-    public Boolean flag;
+    public String SObjectValue {get; set;}
+    public List<String> FieldNameList {get; set;}
+    public String FieldsValue {get; set;}
+    public String Query {get; set;}
+    public Boolean Display {get; set;}
+    public Integer PageSize {get; set;}
+    public Integer PageNumberToGo {get; set;}
+    public Boolean Flag {get; set;}
+    public String SortDirection = 'ASC';
+    public String SortExp {get; set;}
+    public String SortField;
+    public Boolean HasError {get; set;}
     
-    public ApexPages.StandardSetController controllerInstance {get; set;}
-    
-    public DataTableController() {
-        display = false;
-        recordsList = new List<sObject>();
-        fieldNameList = new List<String>();
-        query = 'SELECT ';
-        pageSize = 5;
-        flag = true;
+    public String SortExpression {
+        get {
+            SortField = SortExp;
+            return SortExp;
+        }
+        set;
     }
     
-    public List<sObject> recordsList {
+    public Integer PageNumber {
+        get { return ControllerInstance.getPageNumber(); }  
+        set;  
+    }
+    
+    public Integer ResultSize {  
+        get { return ControllerInstance.getResultSize(); }  
+        set;  
+    }
+    
+    public String getSortDirection() {
+        // If no column is selected. 
+        if (String.isBlank(SortExpression)) {
+            SortDirection = 'ASC';
+        }
+        return SortDirection;
+    }
+    
+    public ApexPages.StandardSetController ControllerInstance {get; set;}
+    
+    public List<sObject> RecordsList {
         get {
-            if (controllerInstance != null) {
-                return (List<sObject>)controllerInstance.getRecords();  
-            }
-            else  {
+            if (ControllerInstance != null) {
+                return (List<sObject>)ControllerInstance.getRecords();  
+            } else  {
                 return null;
             }
         }
         set;
     }
     
+    public DataTableController() {
+        Display = false;
+        HasError = false;
+        RecordsList = new List<sObject>();
+        FieldNameList = new List<String>();
+        Query = 'SELECT ';
+        PageSize = 5;
+        Flag = true;
+    }
+    
     public void getFieldList() {
-        display = true;
-        if(fieldNameList.size() == 0) {
-            if (fieldsValue != null) {
-                fieldsValue= fieldsValue.replaceAll('\\s+', '');
-                fieldNameList = fieldsValue.split(',');
+        Display = true;
+        if(FieldNameList.size() == 0) {
+            if (FieldsValue != null) {
+                FieldsValue= FieldsValue.replaceAll('\\s+', '');
+                FieldNameList = FieldsValue.split(',');
             } else {
-                fieldNameList = new List<String>(Schema.getGlobalDescribe().get(sObjectValue).getDescribe().fields.getMap().keySet());
-            }
+                FieldNameList = new List<String> {'Id'};
+                    }
             
-            for (String fieldName : fieldNameList) {
-                query += fieldName + ' ,';
+            for (String fieldName : FieldNameList) {
+                Query += fieldName + ' ,';
             }
-            query = query.substring(0, query.length() - 1);
-            query += ' FROM ' + sObjectValue;
+            Query = Query.substring(0, Query.length() - 1);
+            Query += ' FROM ' + SObjectValue;
         }
-        controllerInstance = new ApexPages.StandardSetController(Database.getQueryLocator(query)); 
-        controllerInstance.setPageSize(pageSize);
+        try {
+            resetQuickGo();
+            ControllerInstance = new ApexPages.StandardSetController(Database.getQueryLocator(Query)); 
+            ControllerInstance.setPageSize(PageSize);
+        } catch(Exception e) {
+            HasError = true;
+            Apexpages.addMessage(new Apexpages.Message(ApexPages.Severity.ERROR, Label.Check_sObject_or_fields_value));
+        }
     }
     
     public void setPageSize(Integer value) {
-        pageSize = value;
+        PageSize = value;
     }
     
     public void setPageNumber() {
-        controllerInstance.setPageNumber(pageNumberToGo);
-    }
-    
-    public Integer pageNumber {
-        get { return controllerInstance.getPageNumber(); }  
-        set;  
+        ControllerInstance.setPageNumber(PageNumberToGo);
     }
     
     public void previous() {
-        controllerInstance.previous();  
+        resetQuickGo();
+        ControllerInstance.previous();  
     }
     
-    public void next() {  
-        controllerInstance.next();  
+    public void next() { 
+        resetQuickGo();
+        ControllerInstance.next();  
     }
     
-    public Integer ResultSize {  
-        get { return controllerInstance.getResultSize(); }  
-        set;  
+    public void resetQuickGo() { 
+        PageNumberToGo = null;
     }
     
     public void sorting() {
-        String queryToSort;
-        if(flag) {
-            queryToSort = query + ' ORDER BY ' + orderBy;
+        if (SortField == SortExp) {
+            SortDirection = ((SortDirection == 'ASC') ? 'DESC' : 'ASC');
         } else {
-            queryToSort = query + ' ORDER BY ' + orderBy + ' DESC';
+            SortDirection = 'ASC';
         }
-        flag = !flag;
-        controllerInstance = new ApexPages.StandardSetController(Database.getQueryLocator(queryToSort));
-        controllerInstance.setPageSize(pageSize);
+        String sortFullExpression = SortExpression  + ' ' + SortDirection;
+        String QueryToSort = Query + ' ORDER BY ' + sortFullExpression;
+        resetQuickGo();
+        system.debug(QueryToSort);
+        ControllerInstance = new ApexPages.StandardSetController(Database.getQueryLocator(QueryToSort));
+        ControllerInstance.setPageSize(PageSize);
     }
 }
