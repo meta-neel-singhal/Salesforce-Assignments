@@ -1,4 +1,5 @@
 <apex:page standardController="Purchase_Order__c" extensions="ProductExtension">
+    <apex:pageMessages />
     <apex:form >
         <apex:pageBlock title="{!$Label.Order_Details}">
             <apex:pageBlockSection columns="1">
@@ -29,7 +30,7 @@
             <table style="width: 100%">
                 <tr>
                     <td>
-                        {!$Label.Page} <apex:outputText value=" {!PageNumber} of {! CEILING(ResultSize / PageSize) }"/>
+                        {!$Label.Page} <apex:outputText value=" {!PageNumber} of {!CEILING(ResultSize / PageSize)}"/>
                     </td>
                     <td align="right">
                         <!-- Previous page -->
@@ -55,18 +56,6 @@
                     <apex:outputLabel id="quantityOutput" value="{!item.Quantity__c}" ondblclick="makeEditable('{!$Component.saveQuantity}', '{!$Component.quantityInput}', '{!$Component.quantityOutput}')" />
                     <apex:inputField id="quantityInput" value="{!item.Quantity__c}" style="display:none" />
                     <apex:commandButton id="saveQuantity" value="{!$Label.Save}" onclick="saveAndDisable('{!$Component.saveQuantity}', '{!$Component.quantityInput}', '{!$Component.quantityOutput}')" style="display:none;" reRender="cart"/>
-                    <script>
-                    function makeEditable(saveQuantity, quantityInput, quantityOutput) {
-                        document.getElementById(quantityInput).style.display = 'inline';
-                        document.getElementById(saveQuantity).style.display = 'inline';
-                        document.getElementById(quantityOutput).style.display = 'none';
-                    }
-                    function saveAndDisable(saveQuantity, quantityInput, quantityOutput) {
-                        document.getElementById(saveQuantity).style.display = 'none';
-                        document.getElementById(quantityInput).style.display = 'none';
-                        document.getElementById(quantityOutput).style.display = 'inline';
-                    }
-                    </script> 
                 </apex:column>
                 <apex:column headerValue="{!$Label.Total_Price}">
                     <apex:inputText id="amount" value="{!item.Total_Price__c}" html-readonly="true" style="border:none; background-color:transparent;" />  
@@ -83,5 +72,17 @@
                 </apex:column>
             </apex:pageBlockTable>
         </apex:pageBlock>    
-    </apex:form>   
+    </apex:form>
+    <script>
+    function makeEditable(saveQuantity, quantityInput, quantityOutput) {
+        document.getElementById(quantityInput).style.display = 'inline';
+        document.getElementById(saveQuantity).style.display = 'inline';
+        document.getElementById(quantityOutput).style.display = 'none';
+    }
+    function saveAndDisable(saveQuantity, quantityInput, quantityOutput) {
+        document.getElementById(saveQuantity).style.display = 'none';
+        document.getElementById(quantityInput).style.display = 'none';
+        document.getElementById(quantityOutput).style.display = 'inline';
+    }
+    </script>
 </apex:page>

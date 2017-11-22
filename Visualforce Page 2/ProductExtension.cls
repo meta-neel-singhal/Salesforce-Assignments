@@ -1,41 +1,34 @@
 public class ProductExtension {
-    public String productIdToAdd {get; set;}
-    public String productIdToDelete {get; set;}
-    public Boolean display ;
-    public ID recordId;
-    public ApexPages.StandardController standardController {get; set;}
-    public Map<Id, Purchase_Order_Line_Item__c> cartItems;
-    public Map<Id, Product2> availableProducts;
-    public List<Product2> availableProductsList {get; set;}
-    List<Purchase_Order_Line_Item__c> presentCartItems;
-    public List<Purchase_Order_Line_Item__c> itemsToDelete = new List<Purchase_Order_Line_Item__c>();
+    public String ProductIdToAdd {get; set;}
+    public String ProductIdToDelete {get; set;}
+    public Boolean Display ;
+    public Id RecordId;
+    public Integer Size = 5;
+    public String id = 'id';
+    public ApexPages.StandardController StandardController {get; set;}
+    public Map<Id, Purchase_Order_Line_Item__c> CartItems;
+    public Map<Id, Product2> AvailableProducts;
+    public List<Product2> AvailableProductsList {get; set;}
+    List<Purchase_Order_Line_Item__c> PresentCartItems;
+    public List<Purchase_Order_Line_Item__c> ItemsToDelete = new List<Purchase_Order_Line_Item__c>();
     
-    public ApexPages.StandardSetController productSetController {
+    public ApexPages.StandardSetController ProductSetController {
         get {
-            if(productSetController == null) {
-                availableProducts = new Map<Id, Product2>([SELECT Id, ProductCode, Name, Unit_Price__c FROM Product2]);
-                availableProductsList = availableProducts.values();
-                productSetController = new ApexPages.StandardSetController(availableProductsList);
-                productSetController.setPageSize(5);
+            if(ProductSetController == null) {
+                AvailableProducts = new Map<Id, Product2>([SELECT Id, ProductCode, Name, Unit_Price__c FROM Product2]);
+                AvailableProductsList = AvailableProducts.values();
+                ProductSetController = new ApexPages.StandardSetController(AvailableProductsList);
+                ProductSetController.setPageSize(Size);
             }
-            return productSetController;
+            return ProductSetController;
         }
         set;
     }
     
-    public boolean getDisplay() {
-        if (ApexPages.currentPage().getParameters().get('id') == null) {
-            display = false;
-        } else {
-            display = true;
-        }
-        return display;
-    }
-    
-    public List<Product2> productsList {
+    public List<Product2> ProductsList {
         get {  
-            if(productSetController != null) {
-                return (List<Product2>)productSetController.getRecords();  
+            if(ProductSetController != null) {
+                return (List<Product2>)ProductSetController.getRecords();  
             } else  {
                 return null;
             }
@@ -43,86 +36,99 @@ public class ProductExtension {
         set;
     }
     
-    public ProductExtension(ApexPages.StandardController controller) {
-        standardController = controller;
-        recordId = standardController.getId();
-        cartItems = new Map<Id, Purchase_Order_Line_Item__c>();
-        presentCartItems = [SELECT Id, Name, Product__c, Quantity__c, Total_Price__c, Unit_Price__c
-                            FROM Purchase_Order_Line_Item__c
-                            WHERE Purchase_Order__c = :recordId];
-        for (Purchase_Order_Line_Item__c item : presentCartItems) {
-            cartItems.put(item.Product__c, item);
-        }
-    }
-    
-    public Boolean hasNext {  
-        get { return productSetController.getHasNext(); }  
+    public Boolean HasNext {  
+        get { return ProductSetController.getHasNext(); }  
         set;  
-    }  
-    public Boolean hasPrevious {  
-        get { return productSetController.getHasPrevious(); }  
-        set;  
-    }  
-    public Integer pageNumber {  
-        get { return productSetController.getPageNumber(); }  
-        set;  
-    }  
-    public void previous() {  
-        productSetController.previous();  
-    }  
-    public void next() {  
-        productSetController.next();  
     } 
     
+    public Boolean HasPrevious {  
+        get { return ProductSetController.getHasPrevious(); }  
+        set;  
+    }  
+    
+    public Integer PageNumber {  
+        get { return ProductSetController.getPageNumber(); }  
+        set;  
+    }
+    
     public Integer ResultSize {  
-        get { return productSetController.getResultSize(); }  
+        get { return ProductSetController.getResultSize(); }  
         set;  
     }  
     
     public Integer PageSize {  
-        get { return productSetController.getPageSize(); }  
+        get { return ProductSetController.getPageSize(); }  
         set;  
     }
     
-    public List<Purchase_Order_Line_Item__c> cartItemsList {
-        get { return cartItems.values(); }
+    public List<Purchase_Order_Line_Item__c> CartItemsList {
+        get { return CartItems.values(); }
         set;
     }
+              
+    public boolean getDisplay() {
+        if (ApexPages.currentPage().getParameters().get(id) == null) {
+            Display = false;
+        } else {
+            Display = true;
+        }
+        return Display;
+    }
+      
+    public ProductExtension(ApexPages.StandardController controller) {
+        StandardController = controller;
+        RecordId = StandardController.getId();
+        CartItems = new Map<Id, Purchase_Order_Line_Item__c>();
+        PresentCartItems = [SELECT Id, Name, Product__c, Quantity__c, Total_Price__c, Unit_Price__c
+                            FROM Purchase_Order_Line_Item__c
+                            WHERE Purchase_Order__c = :RecordId];
+        for (Purchase_Order_Line_Item__c item : PresentCartItems) {
+            CartItems.put(item.Product__c, item);
+        }
+    }
+    
+    public void previous() {  
+        ProductSetController.previous();  
+    }  
+    
+    public void next() {  
+        ProductSetController.next();  
+    } 
     
     public void addProduct() {      
-        Product2 product = availableProducts.get(productIdToAdd);
+        Product2 product = AvailableProducts.get(ProductIdToAdd);
         Purchase_Order_Line_Item__c lineItem = new Purchase_Order_Line_Item__c(Product__c = product.Id, 
-                                                                               Purchase_Order__c = recordId,
+                                                                               Purchase_Order__c = RecordId,
                                                                                Total_Price__c = product.Unit_Price__c,
                                                                                Quantity__c = 1,
                                                                                Unit_Price__c = product.Unit_Price__c);
-        cartItems.put(product.Id, lineItem);
-        for (Integer count = 0; count < availableProductsList.size(); count++) {
-            if (availableProductsList.get(count).Id == productIdToAdd) {
-                availableProductsList.remove(count);
+        CartItems.put(product.Id, lineItem);
+        for (Integer count = 0; count < AvailableProductsList.size(); count++) {
+            if (AvailableProductsList.get(count).Id == ProductIdToAdd) {
+                AvailableProductsList.remove(count);
             }
         }
         
-        productSetController = new ApexPages.StandardSetController(availableProductsList);
-        productSetController.setPageSize(5);
+        ProductSetController = new ApexPages.StandardSetController(AvailableProductsList);
+        ProductSetController.setPageSize(Size);
     }
     
     public void deleteProduct() {
-        cartItems.remove(productIdToDelete);
-        availableProductsList.add(availableProducts.get(productIdToDelete));
+        CartItems.remove(ProductIdToDelete);
+        AvailableProductsList.add(AvailableProducts.get(ProductIdToDelete));
         
-        productSetController = new ApexPages.StandardSetController(availableProductsList);
-        productSetController.setPageSize(5);
+        ProductSetController = new ApexPages.StandardSetController(AvailableProductsList);
+        ProductSetController.setPageSize(Size);
     }
     
     public PageReference saveChanges() {
-        standardController.save();
-        delete itemsToDelete;
-        upsert cartItems.values();
+        StandardController.save();
+        delete ItemsToDelete;
+        upsert CartItems.values();
         PageReference orderPage;
         
-        if (ApexPages.currentPage().getParameters().get('id') != null) {
-            orderPage = new PageReference('https://ap5.salesforce.com/' + recordId);
+        if (ApexPages.currentPage().getParameters().get(id) != null) {
+            orderPage = new PageReference('https://ap5.salesforce.com/' + RecordId);
         } else {
             orderPage = new PageReference('https://ap5.salesforce.com/a05/o');
         }
