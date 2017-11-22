@@ -1,0 +1,46 @@
+<apex:component controller="DataTableController">
+    <apex:attribute name="sObjectName" description="The object to query on."
+                    type="String" required="true" assignTo="{!sObjectValue}"/>
+    
+    <apex:attribute name="fieldsName" description="The required fields(comma separated values) of object."
+                    type="String" assignTo="{!fieldsValue}"/>
+    <apex:pageMessages />
+    <apex:form rendered="{!!HasError}" >
+        <apex:commandButton value="{!$Label.Display_Data}" action="{!getFieldList}" rendered="{!!display}" />
+        <apex:pageBlock id="dataBlock" title="{!sObjectValue}" rendered="{!display}" >            
+            <div style="text-align:right;">
+                {!$Label.Records_per_Page}
+                <apex:selectList value="{!pageSize}" size="1" >
+                    <apex:selectOption itemValue="5" itemLabel="5"/>
+                    <apex:selectOption itemValue="15" itemLabel="15"/>
+                    <apex:selectOption itemValue="30" itemLabel="30"/>
+                    <apex:actionSupport event="onchange" action="{!getFieldList}" reRender="dataBlock"/>
+                </apex:selectList>
+                <apex:inputText id="quickGo" value="{!pageNumberToGo}"/>
+                <apex:commandButton value="{!$Label.Quick_Go}" action="{!setPageNumber}"/>
+            </div>
+            <apex:pageBlockTable value="{!recordsList}" var="record">
+                <apex:repeat value="{!fieldNameList}" var="field">
+                    <apex:column > 
+                        <apex:facet name="header" >
+                            <apex:commandLink style="width:100%" action="{!sorting}" > 
+                                {!field + ' ' + IF(sortExpression==field, IF(sortDirection=='ASC','▲','▼'), '')}
+                                <apex:param name="name" value="{!field}" assignTo="{!sortExp}"/>
+                            </apex:commandLink>
+                        </apex:facet>
+                        {!record[field]}
+                    </apex:column> 
+                </apex:repeat>
+            </apex:pageBlockTable>            
+            <div style="text-align:right;">
+                {!$Label.Page} <apex:outputText value=" {!PageNumber} of {!CEILING(ResultSize / PageSize)}"/>
+            </div>            
+            <div style="text-align:right; display:inline; width:50%;">
+                <apex:commandLink action="{!Previous}" value="{!$Label.Previous_Page}" rendered="{!controllerInstance.hasPrevious}"/>            
+            </div>            
+            <div style="text-align:right; display:inline; width:50%;">
+                <apex:commandLink action="{!Next}" value="{!$Label.Next_Page}" rendered="{!controllerInstance.hasNext}"/>
+            </div>
+        </apex:pageBlock>
+    </apex:form>
+</apex:component>
