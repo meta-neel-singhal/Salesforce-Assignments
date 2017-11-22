@@ -15,6 +15,13 @@
         <value>Accounts List</value>
     </labels>
     <labels>
+        <fullName>Available_Products</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Available Products</shortDescription>
+        <value>Available Products</value>
+    </labels>
+    <labels>
         <fullName>Billing_City</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -43,6 +50,20 @@
         <value>Cancel</value>
     </labels>
     <labels>
+        <fullName>Cart</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Cart</shortDescription>
+        <value>Cart</value>
+    </labels>
+    <labels>
+        <fullName>Check_sObject_or_fields_value</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Check sObject or fields value</shortDescription>
+        <value>Check the value of sObject or fields !!!</value>
+    </labels>
+    <labels>
         <fullName>Class</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -64,11 +85,39 @@
         <value>Clear</value>
     </labels>
     <labels>
+        <fullName>Delete</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete</shortDescription>
+        <value>Delete</value>
+    </labels>
+    <labels>
+        <fullName>Display_Data</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Display Data</shortDescription>
+        <value>Display Data</value>
+    </labels>
+    <labels>
+        <fullName>Edit</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Edit</shortDescription>
+        <value>Edit</value>
+    </labels>
+    <labels>
         <fullName>Error</fullName>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Error</shortDescription>
         <value>Error :</value>
+    </labels>
+    <labels>
+        <fullName>Error_parsing_the_attachment</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error parsing the attachment</shortDescription>
+        <value>Error parsing the attachment !!!</value>
     </labels>
     <labels>
         <fullName>First_Page</fullName>
@@ -92,11 +141,53 @@
         <value>Next Page</value>
     </labels>
     <labels>
+        <fullName>No_record_found</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>No record found</shortDescription>
+        <value>No record found</value>
+    </labels>
+    <labels>
+        <fullName>Order_Details</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order Details</shortDescription>
+        <value>Order Details</value>
+    </labels>
+    <labels>
+        <fullName>Page</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Page</shortDescription>
+        <value>Page :</value>
+    </labels>
+    <labels>
         <fullName>Previous_Page</fullName>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Previous Page</shortDescription>
         <value>Previous Page</value>
+    </labels>
+    <labels>
+        <fullName>Quantity</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quantity</shortDescription>
+        <value>Quantity</value>
+    </labels>
+    <labels>
+        <fullName>Quick_Go</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quick Go</shortDescription>
+        <value>Quick Go</value>
+    </labels>
+    <labels>
+        <fullName>Records_per_Page</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Records per Page</shortDescription>
+        <value>Records per Page :</value>
     </labels>
     <labels>
         <fullName>Save</fullName>
@@ -125,5 +216,12 @@
         <protected>true</protected>
         <shortDescription>Student Details</shortDescription>
         <value>Student Details</value>
+    </labels>
+    <labels>
+        <fullName>Total_Price</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Total Price</shortDescription>
+        <value>Total Price</value>
     </labels>
 </CustomLabels>

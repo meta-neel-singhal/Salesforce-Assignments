@@ -1,24 +1,23 @@
 public class PaginationController {
     
-    public string billingCity {get; set;}
-    public string billingState {get; set;}
-    public string billingCountry {get; set;}
-    public Integer size {get; set;}
+    public string BillingCity {get; set;}
+    public string BillingState {get; set;}
+    public string BillingCountry {get; set;}
+    public Integer Size {get; set;}
+    public Boolean Display {get; set;}
     
-    public ApexPages.StandardSetController controllerInstance{get; set;} 
-    
-    public void setSize(Integer value) {
-        size = value;
-    }
+    public ApexPages.StandardSetController ControllerInstance {get; set;} 
     
     public PaginationController() {
-        results = new List<Account>();
+        Results = new List<Account>();
+        Display = false;
+        Size = 5;
     }
     
-    public List<Account> results {
+    public List<Account> Results {
         get {  
-            if(controllerInstance != null) {
-                return (List<Account>)controllerInstance.getRecords();  
+            if(ControllerInstance != null) {
+                return (List<Account>)ControllerInstance.getRecords();  
             } else  {
                 return null;
             }
@@ -27,27 +26,28 @@ public class PaginationController {
     }
     
     public void getAccounts() {
+        Display = true;
         String query = 'SELECT Name, BillingCity, BillingState, BillingCountry FROM Account';
         boolean flag = false;
         String filter = '';
-       
-        if(String.isBlank(BillingCity)) {
-            filter += ' BillingCity LIKE \'%' + String.escapeSingleQuotes(billingCity) + '%\'';
+        
+        if(String.isNotBlank(BillingCity)) {
+            filter += ' BillingCity LIKE \'%' + String.escapeSingleQuotes(BillingCity) + '%\'';
             flag = true;
         }
         
-        if(String.isBlank(BillingState)) {
+        if(String.isNotBlank(BillingState)) {
             if(flag) {
                 filter += ' AND ';
             }
-            filter += ' BillingState LIKE \'%' + String.escapeSingleQuotes(billingState) + '%\'';
+            filter += ' BillingState LIKE \'%' + String.escapeSingleQuotes(BillingState) + '%\'';
         }
         
-        if(String.isBlank(BillingCountry)) {
+        if(String.isNotBlank(BillingCountry)) {
             if(flag) {
                 filter += ' AND ';
             }
-            filter += ' BillingCountry LIKE \'%' + String.escapeSingleQuotes(billingCountry) + '%\'';
+            filter += ' BillingCountry LIKE \'%' + String.escapeSingleQuotes(BillingCountry) + '%\'';
             flag = true;
         }
         
@@ -55,44 +55,44 @@ public class PaginationController {
             query += ' WHERE ' + filter;
         }
         
-        controllerInstance = new ApexPages.StandardSetController(Database.getQueryLocator(query)); 
-        controllerInstance.setPageSize(size);
+        ControllerInstance = new ApexPages.StandardSetController(Database.getQueryLocator(query)); 
+        ControllerInstance.setPageSize(Size);
     }
     
-    public Boolean hasNext {  
+    public Boolean HasNext {  
         get {  
-            return controllerInstance.getHasNext();  
+            return ControllerInstance.getHasNext();  
         }  
         set;  
     } 
     
-    public Boolean hasPrevious {  
+    public Boolean HasPrevious {  
         get {  
-            return controllerInstance.getHasPrevious();  
+            return ControllerInstance.getHasPrevious();  
         }  
         set;  
     }  
     
-    public Integer pageNumber {  
+    public Integer PageNumber {  
         get {  
-            return controllerInstance.getPageNumber();  
+            return ControllerInstance.getPageNumber();  
         }  
         set;  
     } 
     
     public void previous() {  
-        controllerInstance.previous();  
+        ControllerInstance.previous();  
     }
     
     public void next() {  
-        controllerInstance.next();  
+        ControllerInstance.next();  
     }
     
     public void first() {
-        this.controllerInstance.first();
+        this.ControllerInstance.first();
     }
     
     public void last() {
-        this.controllerInstance.last();        
+        this.ControllerInstance.last();        
     }
 }

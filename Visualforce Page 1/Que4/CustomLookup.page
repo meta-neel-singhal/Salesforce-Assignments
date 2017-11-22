@@ -1,6 +1,7 @@
 <apex:page controller="CustomLookupController">
     <apex:form > 
-        <apex:pageBlock >
+        <apex:pageMessages />
+        <apex:pageBlock rendered="{!!HasError}">
             <apex:pageBlockSection >
                 <apex:selectRadio value="{!contactId}" layout="pageDirection">
                     <apex:selectOptions value="{!contacts}"/>

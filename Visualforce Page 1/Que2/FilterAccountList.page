@@ -3,20 +3,20 @@
         <apex:pageBlock title="{!$Label.Account}">
             
             <apex:pageBlockSection columns="1">
-                <apex:inputText label="{!$Label.Billing_City}" value="{!billingCity}" />
-                <apex:inputText label="{!$Label.Billing_State}" value="{!billingState}" />
-                <apex:inputText label="{!$Label.Billing_Country}" value="{!billingCountry}" />
+                <apex:inputText label="{!$Label.Billing_City}" value="{!BillingCity}" />
+                <apex:inputText label="{!$Label.Billing_State}" value="{!BillingState}" />
+                <apex:inputText label="{!$Label.Billing_Country}" value="{!BillingCountry}" />
             </apex:pageBlockSection>
             
             <apex:pageBlockButtons >
-                <apex:commandButton action="{!search}" value="{!$Label.Search}"/>
+                <apex:commandButton action="{!search}" value="{!$Label.Search}" reRender="accounts" />
             </apex:pageBlockButtons>
             
         </apex:pageBlock>
 
         <apex:pageBlock title="{!$Label.Accounts_List}">       
             
-            <apex:pageBlockTable value="{!filterAccounts}" var="account">
+            <apex:pageBlockTable value="{!filterAccounts}" id="accounts" var="account">
                 <apex:column value="{!account.name}"/>
                 <apex:column value="{!account.billingCity}"/>
                 <apex:column value="{!account.billingState}"/>

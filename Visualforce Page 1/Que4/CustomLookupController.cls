@@ -1,17 +1,23 @@
 public class CustomLookupController {
     
-    private final Opportunity opportunity;
-    public Id contactId {get; set;}
+    private final Opportunity OpportunityObject;
+    public Id ContactId {get; set;}
+    public Boolean HasError {get; set;}
     
     public CustomLookupController() {
-        opportunity = [SELECT Id, Name, Bill_To_Contact__c, Manager__c FROM Opportunity WHERE Id = :ApexPages.currentPage().getParameters().get('id')];
-        contactId = opportunity.Bill_To_Contact__c;
+        try {
+            HasError = false;
+            OpportunityObject = [SELECT Id, Name, Bill_To_Contact__c, Manager__c FROM Opportunity WHERE Id = :ApexPages.currentPage().getParameters().get('id')];
+            ContactId = OpportunityObject.Bill_To_Contact__c;
+        } catch (Exception e) {
+            HasError = true;
+            Apexpages.addMessage(new Apexpages.Message(ApexPages.Severity.ERROR, System.Label.no_record_found));
+        }
     }
     
     public List<SelectOption> getContacts() {
-        List<Contact> contacts = (List<Contact>)[SELECT Id, Name, Subjects__c FROM Contact WHERE AccountId = :opportunity.Manager__c];
         List<SelectOption> options = new List<SelectOption>();
-        
+        List<Contact> contacts = (List<Contact>)[SELECT Id, Name, Subjects__c FROM Contact WHERE AccountId = :OpportunityObject.Manager__c];
         for(Contact contact : contacts) {
             options.add(new SelectOption(contact.Id, contact.Name));
         }
@@ -19,23 +25,23 @@ public class CustomLookupController {
     }
     
     public PageReference clear() {
-        opportunity.Bill_To_Contact__c = null;
-        update opportunity;
+        OpportunityObject.Bill_To_Contact__c = null;
+        update OpportunityObject;
         
-        PageReference redirectPage = new ApexPages.StandardController(opportunity).view();
+        PageReference redirectPage = new ApexPages.StandardController(OpportunityObject).view();
         return redirectPage;
     }
     
     public PageReference save() {
-        opportunity.Bill_To_Contact__c = contactId;
-        update opportunity;
+        OpportunityObject.Bill_To_Contact__c = ContactId;
+        update OpportunityObject;
         
-        PageReference redirectPage = new ApexPages.StandardController(opportunity).view();
+        PageReference redirectPage = new ApexPages.StandardController(OpportunityObject).view();
         return redirectPage; 
     }
     
     public PageReference cancel() {
-        PageReference redirectPage = new ApexPages.StandardController(opportunity).view();
+        PageReference redirectPage = new ApexPages.StandardController(OpportunityObject).view();
         return redirectPage;
     }  
 }

@@ -1,15 +1,14 @@
-public class savePDF {
+public class SavePDFController {
+    private static Student__c STUDENT;
     
-    private final Student__c student;
-    
-    public savePdf() {
-        student = [SELECT Id FROM Student__c WHERE Id = :ApexPages.currentPage().getParameters().get('id')];
+    public SavePDFController() {
+        STUDENT = [SELECT Id FROM Student__c WHERE Id = :ApexPages.currentPage().getParameters().get('id')];
     }
     
     public PageReference saveAttachment() {
-        List<Attachment> oldAttachment = [Select id, name from Attachment where parentId = :student.Id ];
+        List<Attachment> oldAttachment = [SELECT Id, Name FROM Attachment WHERE ParentId = :STUDENT.Id ];
         if (oldAttachment.size() > 0) {
-            Delete oldAttachment;
+            delete oldAttachment;
         }
         
         Attachment attachment = new Attachment(); 
