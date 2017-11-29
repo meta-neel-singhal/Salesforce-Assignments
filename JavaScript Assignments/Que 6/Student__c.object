@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <content>NewStudentPage</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <content>NewStudentPage</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Age__c</fullName>
+        <externalId>false</externalId>
+        <formula>FLOOR((TODAY() - DOB__c)/365.2425)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Age</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Class__c</fullName>
+        <externalId>false</externalId>
+        <label>Class</label>
+        <referenceTo>Class__c</referenceTo>
+        <relationshipLabel>Students</relationshipLabel>
+        <relationshipName>Students</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Credit_Card_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Credit Card Number</label>
+        <length>19</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DOB__c</fullName>
+        <externalId>false</externalId>
+        <label>DOB</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Demo_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Demo Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>First_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>First Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Generate_PDF__c</fullName>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&quot;https://c.ap5.visual.force.com/apex/AttachPDF?id=&quot;&amp;Id, &quot;Generate PDF&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Generate PDF</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Last_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Name</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Married__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Married</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Mix_Pct__c</fullName>
+        <externalId>false</externalId>
+        <label>Mix Pct</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Multiple_of_5__c</fullName>
+        <externalId>false</externalId>
+        <label>Multiple of 5</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sex__c</fullName>
+        <externalId>false</externalId>
+        <label>Sex</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Male</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Female</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Spouse_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Spouse Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Student</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Female_Students</fullName>
+        <columns>NAME</columns>
+        <columns>DOB__c</columns>
+        <columns>Class__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sex__c</field>
+            <operation>equals</operation>
+            <value>Female</value>
+        </filters>
+        <label>Female Students</label>
+    </listViews>
+    <listViews>
+        <fullName>Male_Students</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>Sex__c</field>
+            <operation>equals</operation>
+            <value>Male</value>
+        </filters>
+        <label>Male Students</label>
+    </listViews>
+    <nameField>
+        <label>Student Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Students</pluralLabel>
+    <searchLayouts>
+        <listViewButtons>Delete_Students</listViewButtons>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Check_Credit_Card_Number_Format</fullName>
+        <active>true</active>
+        <description>REGEX is used to set format of Credit Card Number by which user is either allowed to enter 3 sets having 4 digits and a &apos;-&apos; followed by another set of 4 digits (Ex: 9999-9999-9999-9999) or the user can enter 16 digits continuously (Ex: 9999999999999999).</description>
+        <errorConditionFormula>NOT( REGEX( Credit_Card_Number__c , &quot;(((\\d{4}-){3}\\d{4})|\\d{16})?&quot; ) )</errorConditionFormula>
+        <errorDisplayField>Credit_Card_Number__c</errorDisplayField>
+        <errorMessage>Credit Card Number format must be 9999-9999-9999-9999 or 9999999999999999.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Check_Weekday</fullName>
+        <active>true</active>
+        <description>A CASE is made with the condition as MOD of the difference of Demo Date and First Sunday of the Calender (i.e. Jan 7,1990) followed by the cases. If condition results to 0 or 6 the output is 0 else 1. Here, 0 stands for weekends and 1 for weekdays.</description>
+        <errorConditionFormula>CASE(MOD( Demo_Date__c - DATE(1900, 1, 7), 7), 0, 0, 6, 0, 1) = 0</errorConditionFormula>
+        <errorDisplayField>Demo_Date__c</errorDisplayField>
+        <errorMessage>Date must be a weekday.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Multiple_of_Five</fullName>
+        <active>true</active>
+        <description>Validates that a custom field called Multiple of 5 is a multiple of five by taking the MOD of field value by 5.</description>
+        <errorConditionFormula>MOD( Multiple_of_5__c, 5) &lt;&gt; 0</errorConditionFormula>
+        <errorDisplayField>Multiple_of_5__c</errorDisplayField>
+        <errorMessage>Number must be a multiple of five.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Validate_DOB</fullName>
+        <active>true</active>
+        <description>Checks that Student DOB should not be greater than TODAY.</description>
+        <errorConditionFormula>DOB__c &gt; TODAY()</errorConditionFormula>
+        <errorDisplayField>DOB__c</errorDisplayField>
+        <errorMessage>DOB should not be greater than TODAY.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Validate_Mix_Pct</fullName>
+        <active>true</active>
+        <description>Validates that a custom field called Mix Pct is between 0 and 100%. In percent field, 100% is denoted as 1.0, 50% as 0.5, 0% as 0.0 and so on.</description>
+        <errorConditionFormula>OR(
+   Mix_Pct__c &gt; 1.0,
+   Mix_Pct__c &lt; 0.0
+)</errorConditionFormula>
+        <errorDisplayField>Mix_Pct__c</errorDisplayField>
+        <errorMessage>Mix Pct must be between 0 and 100%.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Alert</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Alert</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>alert(&quot;Hello World&quot;)</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Delete_Students</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>page</linkType>
+        <masterLabel>Delete Students</masterLabel>
+        <openType>replace</openType>
+        <page>DeleteStudents</page>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+    </webLinks>
+    <webLinks>
+        <fullName>Edit</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Edit</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>window.open(&quot;/apex/EditStudent?id={!Student__c.Id}&quot;, &quot;__blank&quot;, &quot;height=570, width=600&quot;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>New</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>New</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>window.open(&quot;/apex/NewClassPage&quot;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Popup</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Popup</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>window.open(&quot;/apex/StudentDetailsPopup?id={!Student__c.Id}&quot;, &quot;__blank&quot;, 
+&quot;height=300,width=600&quot;);</url>
+    </webLinks>
+</CustomObject>

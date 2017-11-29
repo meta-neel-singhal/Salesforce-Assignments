@@ -1,0 +1,17 @@
+<apex:page standardController="Student__c" recordSetVar="students" extensions="DeleteStudentsExtension">
+    <apex:pageMessages />
+    <apex:form rendered="{!!HasError}">
+        <apex:pageBlock title="{!$Label.Delete_Students}">
+            <apex:pageBlockTable value="{!students}" var="student">
+                <apex:column value="{!student.First_Name__c}" />
+                <apex:column value="{!student.Last_Name__c}" />
+                <apex:column value="{!student.Sex__c}" />
+                <apex:column value="{!student.Class__c}" />
+            </apex:pageBlockTable>
+            <apex:pageBlockButtons >
+           	<apex:commandButton value="{!$Label.Continue}" action="{!deleteSelectedStudents}" />
+            <apex:commandButton value="{!$Label.Cancel}" action="{!redirectToListView}" />
+           </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
