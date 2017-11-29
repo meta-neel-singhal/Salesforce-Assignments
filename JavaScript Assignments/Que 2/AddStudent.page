@@ -1,0 +1,12 @@
+<apex:page controller="AddStudentController" showHeader="false">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:inputText label="{!$Label.Student_Name}" value="{!studentName}" />
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!add}" value="{!$Label.Save}" oncomplete="window.close()" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

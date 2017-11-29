@@ -1,0 +1,31 @@
+<apex:page standardController="Student__c" showHeader="false">
+    <apex:form >
+        <apex:pageBlock title="{!$Label.Student}">
+            <apex:pageBlockSection columns="1">
+                <apex:inputField value="{!Student__c.Name}"/>
+                <apex:inputField value="{!Student__c.First_Name__c}"/>
+                <apex:inputField value="{!Student__c.Last_Name__c}"/>
+                <apex:inputField value="{!Student__c.Class__c}"/>
+                <apex:inputField value="{!Student__c.DOB__c}"/>
+                <apex:inputField value="{!Student__c.Sex__c}"/>
+                <apex:inputField value="{!Student__c.Email__c}"/>
+                <apex:inputField value="{!Student__c.Married__c}"/>
+                <apex:inputField value="{!Student__c.Spouse_Name__c}"/>
+                <apex:inputField value="{!Student__c.Multiple_of_5__c}"/>
+                <apex:inputField value="{!Student__c.Mix_Pct__c}"/>
+                <apex:inputField value="{!Student__c.Demo_Date__c}"/>
+                <apex:inputField value="{!Student__c.Credit_Card_Number__c}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!quickSave}" value="{!$Label.Save}" oncomplete="closeAndRefresh()" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+    <script>
+    function closeAndRefresh() {
+        window.close();
+        window.opener.location.href="/{!$CurrentPage.parameters.Id}";
+    }
+    </script>
+</apex:page>
