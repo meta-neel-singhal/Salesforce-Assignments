@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Account</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Account</shortDescription>
+        <value>Account</value>
+    </labels>
+    <labels>
+        <fullName>Account_Name</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Account Name</shortDescription>
+        <value>Account Name</value>
+    </labels>
+    <labels>
+        <fullName>Accounts_List</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Accounts List</shortDescription>
+        <value>Accounts List</value>
+    </labels>
+    <labels>
+        <fullName>Available_Products</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Available Products</shortDescription>
+        <value>Available Products</value>
+    </labels>
+    <labels>
+        <fullName>Billing_City</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Billing City</shortDescription>
+        <value>Billing City</value>
+    </labels>
+    <labels>
+        <fullName>Billing_Country</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Billing Country</shortDescription>
+        <value>Billing Country</value>
+    </labels>
+    <labels>
+        <fullName>Billing_State</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Billing State</shortDescription>
+        <value>Billing State</value>
+    </labels>
+    <labels>
+        <fullName>Cancel</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>Cannot_delete_class</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Cannot delete class</shortDescription>
+        <value>Can&apos;t delete class since more than 2 females are present!!!</value>
+    </labels>
+    <labels>
+        <fullName>Cart</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Cart</shortDescription>
+        <value>Cart</value>
+    </labels>
+    <labels>
+        <fullName>Check_sObject_or_fields_value</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Check sObject or fields value</shortDescription>
+        <value>Check the value of sObject or fields !!!</value>
+    </labels>
+    <labels>
+        <fullName>Class</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Class</shortDescription>
+        <value>Class</value>
+    </labels>
+    <labels>
+        <fullName>Class_List</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Class List</shortDescription>
+        <value>Class List</value>
+    </labels>
+    <labels>
+        <fullName>Class_already_full</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Class already full</shortDescription>
+        <value>&apos;The class is already full!!!&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Clear</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Clear</shortDescription>
+        <value>Clear</value>
+    </labels>
+    <labels>
+        <fullName>Continue</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Continue</shortDescription>
+        <value>Continue</value>
+    </labels>
+    <labels>
+        <fullName>Delete</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete</shortDescription>
+        <value>Delete</value>
+    </labels>
+    <labels>
+        <fullName>Delete_Students</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete Students</shortDescription>
+        <value>Delete Students</value>
+    </labels>
+    <labels>
+        <fullName>Display_Data</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Display Data</shortDescription>
+        <value>Display Data</value>
+    </labels>
+    <labels>
+        <fullName>Edit</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Edit</shortDescription>
+        <value>Edit</value>
+    </labels>
+    <labels>
+        <fullName>Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error</shortDescription>
+        <value>Error :</value>
+    </labels>
+    <labels>
+        <fullName>Error_parsing_the_attachment</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error parsing the attachment</shortDescription>
+        <value>Error parsing the attachment !!!</value>
+    </labels>
+    <labels>
+        <fullName>First_Page</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>First Page</shortDescription>
+        <value>First Page</value>
+    </labels>
+    <labels>
+        <fullName>Hindi_teacher_is_not_allowed</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Hindi teacher is not allowed</shortDescription>
+        <value>Hindi Teacher is not allowed to be inserted or updated!!!</value>
+    </labels>
+    <labels>
+        <fullName>Last_Page</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Last Page</shortDescription>
+        <value>Last Page</value>
+    </labels>
+    <labels>
+        <fullName>Next_Page</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Next Page</shortDescription>
+        <value>Next Page</value>
+    </labels>
+    <labels>
+        <fullName>No_record_found</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>No record found</shortDescription>
+        <value>No record found</value>
+    </labels>
+    <labels>
+        <fullName>Order_Details</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order Details</shortDescription>
+        <value>Order Details</value>
+    </labels>
+    <labels>
+        <fullName>Page</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Page</shortDescription>
+        <value>Page :</value>
+    </labels>
+    <labels>
+        <fullName>Previous_Page</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Previous Page</shortDescription>
+        <value>Previous Page</value>
+    </labels>
+    <labels>
+        <fullName>Quantity</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quantity</shortDescription>
+        <value>Quantity</value>
+    </labels>
+    <labels>
+        <fullName>Quick_Go</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quick Go</shortDescription>
+        <value>Quick Go</value>
+    </labels>
+    <labels>
+        <fullName>Records_per_Page</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Records per Page</shortDescription>
+        <value>Records per Page :</value>
+    </labels>
+    <labels>
+        <fullName>Save</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>Search</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Search</shortDescription>
+        <value>Search</value>
+    </labels>
+    <labels>
+        <fullName>Status_Changed</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Status Changed</shortDescription>
+        <value>Status Changed</value>
+    </labels>
+    <labels>
+        <fullName>Status_Email_Message</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Status Email Message</shortDescription>
+        <value>The status of your loan application named {0} is changed to {1}</value>
+    </labels>
+    <labels>
+        <fullName>Student</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Student</shortDescription>
+        <value>Student</value>
+    </labels>
+    <labels>
+        <fullName>Student_Details</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Student Details</shortDescription>
+        <value>Student Details</value>
+    </labels>
+    <labels>
+        <fullName>Student_Name</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Student Name</shortDescription>
+        <value>Student Name</value>
+    </labels>
+    <labels>
+        <fullName>Total_Amount</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Total Amount</shortDescription>
+        <value>Total Amount</value>
+    </labels>
+    <labels>
+        <fullName>Total_Price</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Total Price</shortDescription>
+        <value>Total Price</value>
+    </labels>
+</CustomLabels>
