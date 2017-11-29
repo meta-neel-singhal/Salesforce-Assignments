@@ -1,0 +1,12 @@
+<apex:page controller="ReportPageController">
+    	<apex:pageBlock title="Report">
+        	<apex:pageBlockTable value="{!Results}" var="opportunity">
+            	<apex:column value="{!opportunity['accountName']}">
+                    <apex:facet name="header">{!$Label.Account_Name}</apex:facet>
+                </apex:column>
+                <apex:column value="{!opportunity['totalAmount']}">
+                    <apex:facet name="header">{!$Label.Total_Amount}</apex:facet>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+</apex:page>
