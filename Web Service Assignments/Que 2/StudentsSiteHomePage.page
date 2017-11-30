@@ -1,0 +1,59 @@
+<apex:page controller="StudentsSiteHomePageController" tabStyle="Student__c">
+    <apex:form id="form">
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="1" title="Students List" collapsible="false">
+                <apex:pageBlockTable value="{!StudentNames}" var="student">
+                    <apex:column headerValue="Name">
+                        {!student.Name}
+                        <apex:actionSupport event="onclick" action="{!getStudentDetails}" reRender="form">
+                            <apex:param name="studentId" value="{!student.Id}" assignTo="{!StudentId}" />
+                        </apex:actionSupport>
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Student Details" rendered="{!Display}" columns="1" collapsible="false">
+                <apex:outputField value="{!Student.First_Name__c}" />
+                <apex:outputField value="{!Student.Last_Name__c}" />
+                <apex:outputField value="{!Student.DOB__c}" />
+                <apex:outputField value="{!Student.Sex__c}" />
+                <apex:outputField value="{!Student.Class__c}" />
+                <apex:outputField value="{!Student.Married__c}" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<apex:page controller="StudentsSiteHomePageController">
+<apex:form >
+<apex:pageBlock >
+<apex:pageBlockSection >
+<apex:selectList size="{!Size}" value="{!selectStudent}" onchange="{!studentDetails}"> 
+<apex:actionSupport event="onchange" reRender="details" />
+<apex:param name="name" value=""/>
+<apex:selectOptions value="{!Students}" />
+</apex:selectList>  
+</apex:pageBlockSection>
+
+<apex:pageBlockTable title="Student Details" rendered="{!Display}" id="details" value="{!selectStudent}" var="student">
+<apex:column value="{!student.Name}" />
+<apex:column value="{!student.DOB__c}" />
+<apex:column value="{!student.Sex__c}" />
+<apex:column value="{!student.Married__c}" />
+</apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page> -->
